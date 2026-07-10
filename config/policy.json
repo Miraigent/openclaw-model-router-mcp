@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "status": "openclaw_codex_native_planning_execution_wrapper_default_off",
+  "arbiter_policy": {
+    "default_model": "openai/gpt-5.6-sol",
+    "default_strategy": "sol_judges_then_downshift",
+    "downshift_allowed_when": [
+      "task is bounded and low risk",
+      "expected output is short, structured, or template-like",
+      "task does not require deep reasoning, architecture, security, or production judgment",
+      "task has no secret, payment, deletion, external send, legal, medical, financial, or adult risk"
+    ],
+    "downshift_blocked_when": [
+      "critical keyword or sensitive data class is present",
+      "task affects production, credentials, billing, deletion, external posting, or compliance",
+      "task requires final design judgment, implementation strategy, security review, or release approval"
+    ]
+  },
+  "execution_layer": {
+    "enabled": false,
+    "enable_source": "server_owned_config_or_MODEL_ROUTER_EXECUTION_ENABLED_only",
+    "client_enable_allowed": false,
+    "allocation_policy": "sol_dynamic_subtask_judgment_no_fixed_ratio",
+    "allowed_models": [
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.6-terra",
+      "openai/gpt-5.6-luna"
+    ],
+    "max_cost_usd": 0.5,
+    "timeout_ms": 180000,
+    "max_attempts_per_model_call": 2,
+    "allow_external_actions": false,
+    "blocked_data_classes": ["secret", "credential", "personal_sensitive", "production"],
+    "stop_lines": [
+      "execution_default_off",
+      "client_cannot_enable_execution",
+      "secret_credential_personal_sensitive_production_blocked",
+      "external_actions_blocked",
+      "unknown_model_fail_closed",
+      "budget_exceeded_before_next_call",
+      "openclaw_codex_auth_required",
+      "router_agent_tools_isolated",
+      "model_fallback_blocked"
+    ]
+  },
+  "critical_keywords": [
+    "production", "deploy", "本番", "デプロイ", "publish", "投稿して", "live投稿", "実投稿", "公開",
+    "send", "broadcast", "送信", "削除", "delete", "payment", "billing", "stripe", "決済", "課金",
+    "api key", "apikey", "secret", "token", "cookie", "password", "credential", "認証", "鍵",
+    "法務", "法律", "医療", "金融助言", "adult", "アダルト", "個人情報",
+    "住所", "電話番号", "メールアドレス", "氏名", "生年月日", "マイナンバー", "口座", "クレカ",
+    "email address", "phone number", "date of birth", "bank account", "credit card",
+    "privacy", "oauth", "root"
+  ],
+  "deep_keywords": [
+    "architecture", "設計", "security", "セキュリティ", "audit", "監査", "review", "レビュー",
+    "research", "調査", "compare", "比較", "multi-step", "複数", "移行", "migration", "mcp", "router", "fallback"
+  ],
+  "cheap_keywords": ["要約", "summarize", "整形", "format", "分類", "classify", "誤字", "rewrite", "短く", "one-liner"],
+  "normal_keywords": ["draft", "下書き", "文章", "記事", "post", "投稿文", "説明", "docs", "ドキュメント"],
+  "daily_limits": {
+    "default_user_usd": 5,
+    "default_workspace_usd": 25
+  },
+  "mvp_stop_lines": [
+    "execution_default_off",
+    "route_task_execution_disabled",
+    "execute_task_requires_server_owned_enable",
+    "gateway_registration_disabled_until_qc",
+    "external_actions_disabled",
+    "github_npm_gateway_discord_release_disabled_until_alice_execution_qc"
+  ]
+}

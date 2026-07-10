@@ -1,0 +1,86 @@
+{
+  "version": 3,
+  "status": "openclaw_codex_native_router_execution_wrapper_default_off",
+  "currency": "USD",
+  "updated_at": "2026-07-10T09:55:00+09:00",
+  "notes": [
+    "plan_task invokes Sol only through the OpenClaw Gateway and existing Codex auth profile.",
+    "execute_task is an explicit Phase 2 entrypoint, but execution is disabled by default and cannot be enabled by client input.",
+    "Sol acts as the arbiter, then server safety gates may retain Sol or require approval; gates never loosen Sol decisions.",
+    "Execution allocation is determined by Sol at the subtask level; configured reference estimates are not routing ratios.",
+    "Prices are user-configured reference estimates only and are not official pricing, quotes, or actual billing."
+  ],
+  "pricing": {
+    "status": "configured_reference_not_official_or_billing",
+    "source": "operator_config",
+    "disclaimer": "Reference values may be stale or different from actual provider billing."
+  },
+  "arbiter": {
+    "default_model": "openai/gpt-5.6-sol",
+    "strategy": "sol_judges_then_downshift",
+    "goal": "Default to Sol-quality judgment, then use cheaper models only for bounded subtasks where quality loss is unlikely."
+  },
+  "model_catalog": {
+    "openai/gpt-5.6-luna": {
+      "provider": "openai",
+      "model_id": "gpt-5.6-luna",
+      "role": "cheap_fast",
+      "availability": "configured",
+      "estimated_input_usd_per_million": 1,
+      "estimated_output_usd_per_million": 6,
+      "subtask_execution_allowed": true
+    },
+    "openai/gpt-5.6-terra": {
+      "provider": "openai",
+      "model_id": "gpt-5.6-terra",
+      "role": "normal_balanced",
+      "availability": "configured",
+      "estimated_input_usd_per_million": 2.5,
+      "estimated_output_usd_per_million": 15,
+      "subtask_execution_allowed": true
+    },
+    "openai/gpt-5.6-sol": {
+      "provider": "openai",
+      "model_id": "gpt-5.6-sol",
+      "role": "deep_reasoning",
+      "availability": "configured",
+      "estimated_input_usd_per_million": 5,
+      "estimated_output_usd_per_million": 30,
+      "subtask_execution_allowed": true
+    }
+  },
+  "tiers": {
+    "cheap": {
+      "primary": "openai/gpt-5.6-luna",
+      "fallback": [],
+      "max_cost_usd": 0.05,
+      "approval_required": false,
+      "estimated_input_usd_per_million": 1,
+      "estimated_output_usd_per_million": 6
+    },
+    "normal": {
+      "primary": "openai/gpt-5.6-terra",
+      "fallback": [],
+      "max_cost_usd": 0.5,
+      "approval_required": false,
+      "estimated_input_usd_per_million": 2.5,
+      "estimated_output_usd_per_million": 15
+    },
+    "deep": {
+      "primary": "openai/gpt-5.6-sol",
+      "fallback": [],
+      "max_cost_usd": 2,
+      "approval_required": false,
+      "estimated_input_usd_per_million": 5,
+      "estimated_output_usd_per_million": 30
+    },
+    "critical": {
+      "primary": "openai/gpt-5.6-sol",
+      "fallback": [],
+      "max_cost_usd": 5,
+      "approval_required": true,
+      "estimated_input_usd_per_million": 5,
+      "estimated_output_usd_per_million": 30
+    }
+  }
+}

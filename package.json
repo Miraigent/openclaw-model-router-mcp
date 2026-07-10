@@ -1,0 +1,53 @@
+{
+  "name": "openclaw-model-router-mcp",
+  "version": "0.4.0-rc.9",
+  "private": true,
+  "type": "module",
+  "description": "OpenClaw-native Sol/Terra/Luna router using the existing Codex auth profile, with execution disabled by default.",
+  "license": "MIT",
+  "author": "Miraigent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miraigent/openclaw-model-router-mcp.git"
+  },
+  "homepage": "https://github.com/Miraigent/openclaw-model-router-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Miraigent/openclaw-model-router-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "model-router",
+    "openclaw",
+    "openai",
+    "gpt-5.6"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "openclaw-model-router-mcp": "./src/mcp-server.mjs",
+    "openclaw-model-router-cli": "./src/cli.mjs"
+  },
+  "files": [
+    "src/",
+    "config/",
+    "test/",
+    "README.md",
+    "README.ja.md",
+    "LICENSE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "check": "node --check src/router.mjs && node --check src/cli.mjs && node --check src/mcp-server.mjs && node --check test/router-smoke.mjs && node --check test/mcp-smoke.mjs",
+    "test": "node test/router-smoke.mjs && node test/mcp-smoke.mjs",
+    "estimate": "node src/cli.mjs estimate",
+    "prepack": "npm run check && npm test"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
