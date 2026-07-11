@@ -4,7 +4,9 @@
 
 An OpenClaw-native MCP server that plans and, when explicitly enabled by the operator, executes bounded task routing across Sol, Terra, and Luna while keeping final judgment, memory, verification, and responsibility with Sol.
 
-Version `0.4.0-rc.11` is a public release candidate. Execution remains disabled by default.
+Version `0.4.0-rc.12` is a public release candidate. Execution remains disabled by default.
+
+![Sol, Terra, and Luna routing and reference allocation](https://raw.githubusercontent.com/Miraigent/openclaw-model-router-mcp/main/assets/sol-terra-luna-standard-allocation-cost-diagram-en-2026-07-10.png)
 
 ## What it does
 
@@ -14,7 +16,9 @@ Version `0.4.0-rc.11` is a public release candidate. Execution remains disabled 
 - Terra and Luna results return to Sol for verification; they do not independently own the final answer.
 - Server-side safety gates may keep work on Sol or require approval, but cannot weaken the policy chosen by the operator.
 
-Execution is available only when the operator explicitly enables it. With the default configuration, `execute_task` is hidden and disabled.
+The reference workload mix shown above is **Sol 25% / Terra 45% / Luna 30%**. Under the diagram's stated assumptions, that mix is estimated at **63.5% of the Sol-only reference cost**, or approximately **36.5% lower**. This is an illustrative estimate, not a pricing or usage-limit guarantee. Actual availability, limits, token use, and pricing may differ.
+
+The allocation and savings estimate describe the intended execution mode **only when the operator explicitly enables execution**. With the default configuration, `execute_task` is hidden and disabled, so installing the package alone does not produce that allocation or savings.
 
 ## Safety and authentication model
 

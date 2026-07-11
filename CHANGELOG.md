@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0-rc.12
+
+- Restored the English and Japanese diagrams to the public package descriptions using absolute GitHub-hosted image URLs.
+- Kept diagram binaries out of the npm installation artifact.
+- Retained the explicit estimate and execution disclaimers.
+
 ## 0.4.0-rc.11
 
 - Prepared the package for public npm distribution under the `next` dist-tag.

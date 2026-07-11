@@ -1,6 +1,6 @@
 {
   "name": "openclaw-model-router-mcp",
-  "version": "0.4.0-rc.11",
+  "version": "0.4.0-rc.12",
   "private": false,
   "type": "module",
   "description": "OpenClaw-native Sol/Terra/Luna router using the existing Codex auth profile, with execution disabled by default.",
