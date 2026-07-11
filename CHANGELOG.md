@@ -3,8 +3,7 @@
 ## 0.4.0-rc.11
 
 - Prepared the package for public npm distribution under the `next` dist-tag.
-- Added English and Japanese architecture/allocation diagrams.
-- Expanded English and Japanese documentation with role definitions, install instructions, and explicit estimate/execution disclaimers.
+- Expanded English and Japanese documentation with role definitions, install instructions, and explicit execution disclaimers.
 - Kept `execute_task` hidden and disabled by default.
 
 ## 0.4.0-rc.9
